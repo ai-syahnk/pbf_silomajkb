@@ -20,7 +20,7 @@ body {
 }
 
 .navbar-brand img {
-    padding-left: 16px;
+    /* padding-left: 16px; */
     height: 48px;
 }
 
@@ -165,7 +165,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* Daftar Section */
+/* Button Daftar Section */
 .daftar-section {
     background-color: var(--jkb-purple);
     padding-bottom: 100px;
@@ -190,7 +190,7 @@ body {
     color: white;
 }
 
-/* Footer & Button */
+/* Footer */
 .footer-btn-container {
     background-color: var(--jkb-purple);
     padding: 40px 0;
@@ -266,4 +266,131 @@ body {
         padding: 12px 35px;
         font-size: 1rem;
     }
+}
+
+/* Kompetisi Page */
+.kompetisi-hero {
+    background: linear-gradient(rgba(51, 30, 138, 0.85), rgba(51, 30, 138, 0.85)), url('/images/gkb.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+    color: white;
+}
+
+.kompetisi-section {
+    background-color: #f0edfc;
+    padding: 60px 0;
+    min-height: 100vh;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: white;
+}
+
+.greeting-text {
+    color: var(--jkb-purple);
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+.section-title-kompetisi {
+    color: var(--jkb-purple);
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.breadcrumb-item a, .breadcrumb-item.active {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.card-kompetisi {
+    border-radius: 4px;
+    border: none;
+    overflow: hidden;
+    height: 100%;
+    background: white;
+    padding: 15px;
+    transition: transform 0.3s ease;
+}
+
+.card-kompetisi:hover {
+    transform: translateY(-5px);
+}
+
+.card-kompetisi .img-container {
+    width: 100%;
+    height: 500px; /* Fixed height for uniform posters */
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.card-kompetisi img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fill the container uniformly */
+}
+
+.card-kompetisi .periode-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 2px;
+}
+
+.card-kompetisi .periode-date {
+    font-weight: 700;
+    color: black;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.card-kompetisi .comp-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.btn-lihat-detail {
+    background-color: #331E8A;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-lihat-detail:hover {
+    background-color: #251666;
+    color: white;
+}
+
+/* Custom Pagination */
+.pagination-custom .page-link {
+    background-color: #D9D9D9; /* Dark purple */
+    /* border: 1px solid #312e81; */
+    color: white;
+    padding: 8px 16px;
+}
+
+.pagination-custom .page-item.active .page-link {
+    background-color: var(--jkb-purple);
+    /* border-color: #4338ca; */
+}
+
+.pagination-custom .page-item.disabled .page-link {
+    background-color: #D9D9D9;
+    /* border-color: #1e293b; */
+    color: #64748b;
 }

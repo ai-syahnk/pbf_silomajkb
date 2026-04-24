@@ -4,7 +4,7 @@
 
 <!-- Hero Section -->
 <section class="hero-section">
-    <div class="container-fluid">
+    <div class="container">
         <div class="hero-text">
             <h1>SELAMAT DATANG<br>
                 SISTEM INFORMASI LOMBA MAHASISWA JKB<br>
