@@ -40,7 +40,7 @@
                     <td>{{ Str::limit($item->syarat_ketentuan, 80) }}</td>
                     <td>
                         <div class="d-flex gap-2 justify-content-center">
-                            <button class="btn btn-sm btn-primary" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">Edit</button>
+                            <a href="{{ route('admin.kompetisi.edit', $item->id) }}" class="btn btn-sm btn-primary" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">Edit</a>
                             <button class="btn btn-sm btn-danger">Hapus</button>
                         </div>
                     </td>

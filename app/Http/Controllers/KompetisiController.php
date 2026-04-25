@@ -59,4 +59,53 @@ class KompetisiController extends Controller
 
         return redirect()->route('admin.kompetisi')->with('success', 'Kompetisi berhasil ditambahkan!');
     }
+
+    /**
+     * Tampilkan form edit kompetisi.
+     */
+    public function edit(Kompetisi $kompetisi)
+    {
+        return view('content.panel.admin.kompetisi.edit', compact('kompetisi'));
+    }
+
+    /**
+     * Update data kompetisi.
+     */
+    public function update(Request $request, Kompetisi $kompetisi)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'periode_pendaftaran' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'syarat_ketentuan' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'nama.required' => 'Nama kompetisi wajib diisi.',
+            'periode_pendaftaran.required' => 'Periode pendaftaran wajib diisi.',
+            'deskripsi.required' => 'Deskripsi kompetisi wajib diisi.',
+            'syarat_ketentuan.required' => 'Syarat & ketentuan wajib diisi.',
+            'gambar.image' => 'File harus berupa gambar.',
+            'gambar.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2MB.',
+        ]);
+
+        $data = [
+            'nama' => $request->nama,
+            'periode_pendaftaran' => $request->periode_pendaftaran,
+            'deskripsi' => $request->deskripsi,
+            'syarat_ketentuan' => $request->syarat_ketentuan,
+        ];
+
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama
+            if ($kompetisi->gambar) {
+                Storage::disk('public')->delete($kompetisi->gambar);
+            }
+            $data['gambar'] = $request->file('gambar')->store('kompetisi', 'public');
+        }
+
+        $kompetisi->update($data);
+
+        return redirect()->route('admin.kompetisi')->with('success', 'Kompetisi berhasil diperbarui!');
+    }
 }

@@ -42,4 +42,6 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/kompetisi', [KompetisiController::class, 'index'])->name('admin.kompetisi');
     Route::get('/kompetisi/create', [KompetisiController::class, 'create'])->name('admin.kompetisi.create');
     Route::post('/kompetisi', [KompetisiController::class, 'store'])->name('admin.kompetisi.store');
+    Route::get('/kompetisi/{kompetisi}/edit', [KompetisiController::class, 'edit'])->name('admin.kompetisi.edit');
+    Route::put('/kompetisi/{kompetisi}', [KompetisiController::class, 'update'])->name('admin.kompetisi.update');
 });
