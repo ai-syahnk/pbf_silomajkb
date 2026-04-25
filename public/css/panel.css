@@ -1,0 +1,400 @@
+/* public/css/panel.css */
+:root {
+    --primary-color: #2c128c;
+    /* Dark Purple for active navbar, card bg */
+    --primary-light: #3e1ab2;
+    --text-dark: #111111;
+    --text-muted: #6c757d;
+    --bg-main: #ffffff;
+    /* Body background appears white in design */
+    --white: #ffffff;
+
+    --btn-blue: #0d6efd;
+    --btn-blue-hover: #0b5ed7;
+    --btn-green: #198754;
+    --btn-green-hover: #157347;
+    --btn-red: #dc3545;
+    --btn-red-hover: #bb2d3b;
+
+    --border-color: #e0e0e0;
+    --table-bg: #e2e0ed;
+    /* Light purple/grey for table body */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.top-header {
+    background-color: var(--white);
+    box-shadow: 5px 5px 10px var(--border-color);
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0 2rem; */
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+}
+
+.logo-separator {
+    width: 2px;
+    height: 45px;
+    background-color: #333333;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.logo-text h1 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin: 0;
+    /* Reset margin to prevent extra spacing */
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #6d6d6d;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.user-role {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* Navbar */
+.custom-navbar {
+    background-color: var(--white);
+    margin-top: 72px; /* Push navbar down below the fixed header */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.nav-links {
+    border-bottom: 1px solid var(--border-color);
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links li {
+    padding: 1rem 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links li.active a,
+.nav-links li a:hover {
+    color: var(--primary-color);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 1.5rem 2rem;
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    color: var(--white);
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    padding: 2.5rem 2.5rem 1.5rem;
+}
+
+.card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 0 2.5rem 2.5rem;
+}
+
+/* Table */
+.table-container {
+    background-color: var(--table-bg);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table thead {
+    /* To push the header up above the light background */
+    background-color: var(--primary-color);
+}
+
+.custom-table thead th {
+    color: var(--white);
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.custom-table tbody {
+    background-color: var(--table-bg);
+}
+
+.custom-table tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* very subtle if needed */
+}
+
+.custom-table tbody td {
+    padding: 0.5rem 1.5rem;
+    color: var(--text-dark);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Buttons */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.btn-detail {
+    background-color: var(--btn-blue);
+}
+
+.btn-detail:hover {
+    background-color: var(--btn-blue-hover);
+}
+
+.btn-terima {
+    background-color: var(--btn-green);
+}
+
+.btn-terima:hover {
+    background-color: var(--btn-green-hover);
+}
+
+.btn-tolak {
+    background-color: var(--btn-red);
+}
+
+.btn-tolak:hover {
+    background-color: var(--btn-red-hover);
+}
+
+/* Pagination */
+.pagination-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    font-size: 0.6rem;
+    margin-top: 1.5rem;
+}
+
+.pagination {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.btn-page {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #e0e0e0;
+    color: var(--text-dark);
+    font-size: 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-page.active {
+    background-color: var(--btn-blue);
+    color: white;
+}
+
+.btn-page.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-page:not(.disabled):not(.active):hover {
+    background-color: #d0d0d0;
+}
+
+/* Footer */
+.footer {
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-container p {
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* DataTables Bootstrap 5 Overrides */
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length {
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+    color: var(--text-dark); /* Keep input text dark since background is usually white */
+    font-size: 0.85rem;
+}
+
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 1rem;
+    color: var(--white);
+    font-size: 0.85rem;
+}
+
+.dataTables_wrapper .page-item.active .page-link {
+    background-color: var(--btn-blue);
+    border-color: var(--btn-blue);
+}
+
+.dataTables_wrapper .page-link {
+    color: var(--text-dark);
+    font-size: 0.85rem;
+}
+
+table.dataTable.table-sm > thead > tr > th {
+    padding-right: 20px;
+}
+
+/* Override Bootstrap 5 Table Backgrounds */
+.my-table thead,
+.my-table thead th {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    border-bottom: none !important;
+}
+
+.my-table tbody,
+.my-table tbody tr,
+.my-table tbody td {
+    background-color: var(--table-bg) !important;
+}
+
+/* Add slight rounding to the table if needed */
+.my-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.my-table tbody tr:first-child td:first-child { border-top-left-radius: 0px; }
+.my-table tbody tr:first-child td:last-child { border-top-right-radius: 0px; }
+.my-table tbody tr:last-child td:first-child { border-bottom-left-radius: 0px; }
+.my-table tbody tr:last-child td:last-child { border-bottom-right-radius: 0px; }

@@ -29,3 +29,8 @@ Route::get('/peserta/register', function () {
 Route::get('/admin/login', function () {
     return view('content.web.auth.admin.login');
 })->name('web.admin.login');
+
+// Admin Panel
+Route::get('/admin/dashboard', function () {
+    return view('content.panel.admin.dashboard');
+})->name('admin.dashboard');
