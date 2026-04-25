@@ -37,4 +37,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('content.panel.admin.dashboard');
     })->name('admin.dashboard');
+
+    Route::get('/kompetisi', function () {
+        return view('content.panel.admin.kompetisi.index');
+    })->name('admin.kompetisi');
 });

@@ -10,21 +10,21 @@
         <h3 class="card-title m-0 fw-semibold fs-5">Permintaan Pendaftaran Perlombaan</h3>
     </div>
     <div class="card-body px-4 pb-4 pt-0">
-        <table class="table mb-0 w-100 my-table nowrap">
+        <table class="table mb-0 w-100 my-table">
             <thead>
                 <tr>
-                    <th class="border-0 fw-medium py-3 px-4">Kompetisi</th>
-                    <th class="border-0 fw-medium py-3 px-4">Kategori</th>
-                    <th class="border-0 fw-medium py-3 px-4">Nama Tim</th>
-                    <th class="border-0 fw-medium py-3 px-4 text-center" width="220px">Action</th>
+                    <th>Kompetisi</th>
+                    <th>Kategori</th>
+                    <th>Nama Tim</th>
+                    <th width="10px" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="align-middle border-bottom px-4 py-3">GEMASTIK</td>
-                    <td class="align-middle border-bottom px-4 py-3">xxxxxxxx</td>
-                    <td class="align-middle border-bottom px-4 py-3">xxxxxxxx</td>
-                    <td class="align-middle border-bottom px-4 py-3">
+                    <td>GEMASTIK</td>
+                    <td>xxxxxxxx</td>
+                    <td>xxxxxxxx</td>
+                    <td>
                         <div class="d-flex gap-2">
                             <button class="btn btn-sm btn-primary">Detail</button>
                             <button class="btn btn-sm btn-success">Terima</button>
@@ -33,10 +33,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="align-middle border-bottom px-4 py-3">GEMASTIK</td>
-                    <td class="align-middle border-bottom px-4 py-3">xxxxxxxx</td>
-                    <td class="align-middle border-bottom px-4 py-3">xxxxxxxx</td>
-                    <td class="align-middle border-bottom px-4 py-3">
+                    <td>GEMASTIK</td>
+                    <td>xxxxxxxx</td>
+                    <td>xxxxxxxx</td>
+                    <td>
                         <div class="d-flex gap-2">
                             <button class="btn btn-sm btn-primary">Detail</button>
                             <button class="btn btn-sm btn-success">Terima</button>
@@ -45,10 +45,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="align-middle border-0 px-4 py-3">GEMASTIK</td>
-                    <td class="align-middle border-0 px-4 py-3">xxxxxxxx</td>
-                    <td class="align-middle border-0 px-4 py-3">xxxxxxxx</td>
-                    <td class="align-middle border-0 px-4 py-3">
+                    <td>GEMASTIK</td>
+                    <td>xxxxxxxx</td>
+                    <td>xxxxxxxx</td>
+                    <td>
                         <div class="d-flex gap-2">
                             <button class="btn btn-sm btn-primary">Detail</button>
                             <button class="btn btn-sm btn-success">Terima</button>

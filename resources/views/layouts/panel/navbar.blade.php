@@ -1,8 +1,8 @@
 <nav class="custom-navbar">
     <div class="nav-container">
         <ul class="nav-links">
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li><a href="#">Kompetisi</a></li>
+            <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+            <li class="{{ request()->routeIs('admin.kompetisi') ? 'active' : '' }}"><a href="{{ route('admin.kompetisi') }}">Kompetisi</a></li>
             <li><a href="#">Akun Peserta</a></li>
             <li>
                 <a href="{{ route('admin.logout') }}" 
