@@ -45,7 +45,7 @@
                             <h5 class="comp-title">{{ $item->nama }}</h5>
                             <p class="periode-label">Periode Pendaftaran</p>
                             <p class="periode-date">{{ $item->periode_pendaftaran }}</p>
-                            <a href="{{ route('web.kompetisi.detail', ['slug' => $item->id]) }}" class="btn-lihat-detail">Lihat Detail</a>
+                            <a href="{{ route('web.kompetisi.detail', ['id' => $item->id]) }}" class="btn-lihat-detail">Lihat Detail</a>
                         </div>
                     </div>
                 @empty

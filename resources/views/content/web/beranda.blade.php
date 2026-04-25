@@ -77,7 +77,7 @@
 <!-- Tombol Daftar Sekarang -->
 <section class="daftar-section">
     <div class="container text-center">
-        <button class="btn-daftar">Daftar Sekarang</button>
+        <button class="btn-daftar" onclick="window.location.href='{{ route('web.kompetisi') }}'">Daftar Sekarang</button>
     </div>
 </section>
 

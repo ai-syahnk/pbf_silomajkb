@@ -14,8 +14,9 @@ Route::get('/kompetisi', function () {
     return view('content.web.kompetisi.index', compact('kompetisi'));
 })->name('web.kompetisi');
 
-Route::get('/kompetisi/{slug}', function ($slug) {
-    return view('content.web.kompetisi.detail', ['slug' => $slug]);
+Route::get('/kompetisi/{id}', function ($id) {
+    $kompetisi = Kompetisi::findOrFail($id);
+    return view('content.web.kompetisi.detail', compact('kompetisi'));
 })->name('web.kompetisi.detail');
 
 Route::get('/portal-login', function () {

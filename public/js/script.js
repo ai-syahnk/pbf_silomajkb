@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Handle button click
-    const btnDaftar = document.querySelector('.btn-daftar');
-    if (btnDaftar) {
-        btnDaftar.addEventListener('click', function() {
-            alert('Terima kasih! Silakan lakukan pendaftaran.');
-        });
-    }
+    // const btnDaftar = document.querySelector('.btn-daftar');
+    // if (btnDaftar) {
+    //     btnDaftar.addEventListener('click', function() {
+    //         alert('Terima kasih! Silakan lakukan pendaftaran.');
+    //     });
+    // }
 
     // Handle active nav-link
     const navLinks = document.querySelectorAll('.nav-link');
