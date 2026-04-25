@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($kompetisi as $index => $item)
+                @foreach($kompetisi as $index => $item)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>
@@ -41,15 +41,15 @@
                     <td>
                         <div class="d-flex gap-2 justify-content-center">
                             <a href="{{ route('admin.kompetisi.edit', $item->id) }}" class="btn btn-sm btn-primary" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">Edit</a>
-                            <button class="btn btn-sm btn-danger">Hapus</button>
+                            <form action="{{ route('admin.kompetisi.destroy', $item->id) }}" method="POST" class="form-delete-kompetisi">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                            </form>
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="text-center py-4">Belum ada data kompetisi.</td>
-                </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -59,6 +59,7 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // DataTables init
         if (typeof jQuery !== 'undefined' && $.fn.DataTable) {
             $('.my-table').DataTable({
                 language: {
@@ -70,6 +71,35 @@
                 responsive: true
             });
         }
+
+        // SweetAlert2 delete confirmation
+        document.querySelectorAll('.form-delete-kompetisi').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Data kompetisi akan dihapus secara permanen',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    reverseButtons: false,
+                    customClass: {
+                        popup: 'swal-custom-popup',
+                        title: 'swal-custom-title',
+                        htmlContainer: 'swal-custom-text',
+                        confirmButton: 'swal-btn-confirm',
+                        cancelButton: 'swal-btn-cancel'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
     });
 </script>
 @endpush

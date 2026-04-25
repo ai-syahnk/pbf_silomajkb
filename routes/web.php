@@ -44,4 +44,5 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/kompetisi', [KompetisiController::class, 'store'])->name('admin.kompetisi.store');
     Route::get('/kompetisi/{kompetisi}/edit', [KompetisiController::class, 'edit'])->name('admin.kompetisi.edit');
     Route::put('/kompetisi/{kompetisi}', [KompetisiController::class, 'update'])->name('admin.kompetisi.update');
+    Route::delete('/kompetisi/{kompetisi}', [KompetisiController::class, 'destroy'])->name('admin.kompetisi.destroy');
 });

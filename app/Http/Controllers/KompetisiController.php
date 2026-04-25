@@ -108,4 +108,18 @@ class KompetisiController extends Controller
 
         return redirect()->route('admin.kompetisi')->with('success', 'Kompetisi berhasil diperbarui!');
     }
+
+    /**
+     * Hapus data kompetisi.
+     */
+    public function destroy(Kompetisi $kompetisi)
+    {
+        if ($kompetisi->gambar) {
+            Storage::disk('public')->delete($kompetisi->gambar);
+        }
+
+        $kompetisi->delete();
+
+        return redirect()->route('admin.kompetisi')->with('success', 'Kompetisi berhasil dihapus!');
+    }
 }
