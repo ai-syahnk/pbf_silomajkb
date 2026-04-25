@@ -35,9 +35,9 @@
                     </form>
 
                     <div class="login-footer-text">
-                        Tidak punya akun? <a href="#" class="login-footer-link">Buat Akun</a>
+                        Tidak punya akun? <a href="{{ route('web.peserta.register') }}" class="login-footer-link">Buat Akun</a>
                         <br>
-                        Kembali ke halaman <a href="{{ url('/portal-login') }}" class="login-footer-link">Portal Login</a>
+                        Kembali ke halaman <a href="{{ route('web.portal.login') }}" class="login-footer-link">Portal Login</a>
                     </div>
                 </div>
             </div>
