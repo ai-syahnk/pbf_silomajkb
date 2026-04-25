@@ -21,3 +21,7 @@ Route::get('/portal-login', function () {
 Route::get('/peserta/login', function () {
     return view('content.web.auth.peserta.login');
 })->name('web.peserta.login');
+
+Route::get('/admin/login', function () {
+    return view('content.web.auth.admin.login');
+})->name('web.admin.login');
