@@ -17,16 +17,27 @@
                     <h4 class="login-form-title">Masuk akun Admin</h4>
                     <p class="login-form-subtitle">Masukkan email & kata sandi Anda untuk login</p>
 
-                    <form action="#" method="POST">
+                    <form action="{{ route('admin.login.submit') }}" method="POST">
                         @csrf
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger py-2 px-3" style="font-size: 14px; border-radius: 8px;">
+                            <ul class="mb-0 ps-3">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
                         <div class="mb-3">
                             <label for="email" class="form-label-login">Alamat Email</label>
-                            <input type="email" class="form-control form-control-login" id="email" name="email" placeholder="user@gmail.com" required>
+                            <input type="email" class="form-control form-control-login @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="user@gmail.com">
                         </div>
 
                         <div class="mb-1">
                             <label for="password" class="form-label-login">Kata Sandi</label>
-                            <input type="password" class="form-control form-control-login" id="password" name="password" placeholder="*******" required>
+                            <input type="password" class="form-control form-control-login @error('password') is-invalid @enderror" id="password" name="password" placeholder="*******">
                         </div>
 
                         <a href="#" class="login-forgot-link">Lupa kata sandi? Hubungi Admin</a>

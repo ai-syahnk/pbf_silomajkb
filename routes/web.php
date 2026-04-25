@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,11 +27,14 @@ Route::get('/peserta/register', function () {
     return view('content.web.auth.peserta.register');
 })->name('web.peserta.register');
 
-Route::get('/admin/login', function () {
-    return view('content.web.auth.admin.login');
-})->name('web.admin.login');
+// Admin Auth
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-// Admin Panel
-Route::get('/admin/dashboard', function () {
-    return view('content.panel.admin.dashboard');
-})->name('admin.dashboard');
+// Admin Panel (dilindungi middleware)
+Route::middleware('admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('content.panel.admin.dashboard');
+    })->name('admin.dashboard');
+});

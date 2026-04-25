@@ -11,12 +11,17 @@
             </div>
         </div>
         <div class="user-profile">
+            @php
+                $nameWords = collect(preg_split('/\s+/', trim(Auth::user()->name)))->filter()->values();
+                $displayName = $nameWords->take(2)->implode(' ');
+                $avatarInitials = strtoupper($nameWords->take(2)->map(fn($word) => substr($word, 0, 1))->implode(''));
+            @endphp
             <div class="avatar">
-                A
+                {{ $avatarInitials }}
             </div>
             <div class="user-info">
-                <span class="user-name">Admin</span>
-                <span class="user-role">Admin</span>
+                <span class="user-name">{{ ucwords($displayName) }}</span>
+                <span class="user-role">{{ ucfirst(Auth::user()->role) }}</span>
             </div>
         </div>
     </div>
