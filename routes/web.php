@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\KompetisiController;
+use App\Models\Kompetisi;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,7 +10,8 @@ Route::get('/', function () {
 })->name('web.beranda');
 
 Route::get('/kompetisi', function () {
-    return view('content.web.kompetisi.index');
+    $kompetisi = Kompetisi::latest()->paginate(6);
+    return view('content.web.kompetisi.index', compact('kompetisi'));
 })->name('web.kompetisi');
 
 Route::get('/kompetisi/{slug}', function ($slug) {

@@ -284,7 +284,7 @@ body {
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-    color: white;
+    color: var(--bs-secondary-color) !important;;
 }
 
 .greeting-text {
