@@ -17,3 +17,7 @@ Route::get('/kompetisi/{slug}', function ($slug) {
 Route::get('/portal-login', function () {
     return view('content.web.auth.index');
 })->name('web.portal.login');
+
+Route::get('/peserta/login', function () {
+    return view('content.web.auth.peserta.login');
+})->name('web.peserta.login');
