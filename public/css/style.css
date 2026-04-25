@@ -527,3 +527,62 @@ body {
     color: #000;
     line-height: 1.6;
 }
+
+/* Login Page Section */
+.login-section {
+    position: relative;
+    min-height: calc(100vh - 76px);
+    background: linear-gradient(rgba(51, 30, 138, 0.7), rgba(51, 30, 138, 0.8)), url('/images/hero_edit.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.login-card {
+    background: #D9D9D9;
+    border-radius: 30px;
+    padding: 50px 40px;
+    height: 100%;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+}
+
+.login-logo {
+    height: 90px;
+    margin-bottom: 25px;
+}
+
+.login-card h3 {
+    color: #000;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.login-card p {
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.btn-login-panel {
+    background-color: var(--jkb-purple);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-login-panel:hover {
+    background-color: #251666;
+    color: white;
+}

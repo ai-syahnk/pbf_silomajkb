@@ -24,7 +24,7 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <a href="#" class="btn-login">Login</a>
+                <a href="{{ route('web.portal.login') }}" class="btn-login">Login</a>
             </div>
         </div>
     </div>

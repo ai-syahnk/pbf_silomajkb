@@ -13,3 +13,7 @@ Route::get('/kompetisi', function () {
 Route::get('/kompetisi/{slug}', function ($slug) {
     return view('content.web.kompetisi.detail', ['slug' => $slug]);
 })->name('web.kompetisi.detail');
+
+Route::get('/portal-login', function () {
+    return view('content.web.auth.index');
+})->name('web.portal.login');
