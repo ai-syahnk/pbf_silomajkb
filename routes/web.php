@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\KompetisiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,7 +39,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
         return view('content.panel.admin.dashboard');
     })->name('admin.dashboard');
 
-    Route::get('/kompetisi', function () {
-        return view('content.panel.admin.kompetisi.index');
-    })->name('admin.kompetisi');
+    Route::get('/kompetisi', [KompetisiController::class, 'index'])->name('admin.kompetisi');
+    Route::get('/kompetisi/create', [KompetisiController::class, 'create'])->name('admin.kompetisi.create');
+    Route::post('/kompetisi', [KompetisiController::class, 'store'])->name('admin.kompetisi.store');
 });
