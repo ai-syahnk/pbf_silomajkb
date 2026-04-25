@@ -9,16 +9,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('web.beranda') && !request()->has('competisi') ? 'active' : '' }}" href="/#">Beranda</a>
+                    <a class="nav-link {{ request()->routeIs('web.beranda') && !request()->has('competisi') ? 'active' : '' }}"
+                        href="/#">Beranda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/#about">Tentang</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="/#visi-misi">Visi & Misi</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('web.kompetisi') ? 'active' : '' }}" href="{{ route('web.kompetisi') }}">Kompetisi</a>
+                    <a class="nav-link {{ request()->routeIs('web.kompetisi') || request()->routeIs('web.kompetisi.*') ? 'active' : '' }}"
+                        href="{{ route('web.kompetisi') }}">Kompetisi</a>
                 </li>
             </ul>
             <div class="d-flex">

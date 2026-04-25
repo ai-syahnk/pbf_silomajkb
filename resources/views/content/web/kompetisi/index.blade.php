@@ -23,7 +23,7 @@
     <div class="kompetisi-section">
         <div class="container">
             <div class="mb-5">
-                <h2 class="greeting-text mb-4">Hi, Valen Milan</h2>
+                <h2 class="greeting-text mb-4" style="border-bottom: 1px solid #331E8A;">Hi, Valen Milan</h2>
                 <h3 class="section-title-kompetisi mb-1">Kompetisi</h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
@@ -42,7 +42,7 @@
                         <h5 class="comp-title">Information Technology Creative Competition</h5>
                         <p class="periode-label">Periode Pendaftaran</p>
                         <p class="periode-date">1 Juli -31 Agustus 2026</p>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail</a>
+                        <a href="{{ route('web.kompetisi.detail', ['slug' => 'itcc-2026']) }}" class="btn-lihat-detail">Lihat Detail</a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -53,7 +53,7 @@
                         <h5 class="comp-title">International UI/UX Design Competition</h5>
                         <p class="periode-label">Periode Pendaftaran</p>
                         <p class="periode-date">1 Juli -31 Agustus 2026</p>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail</a>
+                        <a href="{{ route('web.kompetisi.detail', ['slug' => 'international-ui-ux']) }}" class="btn-lihat-detail">Lihat Detail</a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -64,7 +64,7 @@
                         <h5 class="comp-title">Mobile UI/UX Competition JKB 2026</h5>
                         <p class="periode-label">Periode Pendaftaran</p>
                         <p class="periode-date">1 Juli -31 Agustus 2026</p>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail</a>
+                        <a href="{{ route('web.kompetisi.detail', ['slug' => 'mobile-ui-ux']) }}" class="btn-lihat-detail">Lihat Detail</a>
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
                         <h5 class="comp-title">Information Technology Creative Competition</h5>
                         <p class="periode-label">Periode Pendaftaran</p>
                         <p class="periode-date">1 Juli -31 Agustus 2026</p>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail</a>
+                        <a href="{{ route('web.kompetisi.detail', ['slug' => 'itcc-2018']) }}" class="btn-lihat-detail">Lihat Detail</a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -88,7 +88,7 @@
                         <h5 class="comp-title">UI/UX Design Competition</h5>
                         <p class="periode-label">Periode Pendaftaran</p>
                         <p class="periode-date">1 Juli -31 Agustus 2026</p>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail</a>
+                        <a href="{{ route('web.kompetisi.detail', ['slug' => 'ui-ux-design']) }}" class="btn-lihat-detail">Lihat Detail</a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -99,7 +99,7 @@
                         <h5 class="comp-title">Information Technology Creative Competition</h5>
                         <p class="periode-label">Periode Pendaftaran</p>
                         <p class="periode-date">1 Juli -31 Agustus 2026</p>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail</a>
+                        <a href="{{ route('web.kompetisi.detail', ['slug' => 'itcc-2026']) }}" class="btn-lihat-detail">Lihat Detail</a>
                     </div>
                 </div>
             </div>

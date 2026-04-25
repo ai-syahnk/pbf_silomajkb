@@ -7,5 +7,9 @@ Route::get('/', function () {
 })->name('web.beranda');
 
 Route::get('/kompetisi', function () {
-    return view('content.web.kompetisi');
+    return view('content.web.kompetisi.index');
 })->name('web.kompetisi');
+
+Route::get('/kompetisi/{slug}', function ($slug) {
+    return view('content.web.kompetisi.detail', ['slug' => $slug]);
+})->name('web.kompetisi.detail');
