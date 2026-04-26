@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group-custom">
-                            <label>&nbsp;</label>
+                            <label>NIM</label>
                             <input type="text" class="form-control-custom" name="nim"
                                 value="{{ $peserta->nim ?? '' }}" placeholder="Sembilan digit angka">
                         </div>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group-custom">
-                            <label>&nbsp;</label>
+                            <label>Email</label>
                             <input type="email" class="form-control-custom" name="email" value="{{ $user->email }}"
                                 placeholder="Masukan emailmu!">
                         </div>

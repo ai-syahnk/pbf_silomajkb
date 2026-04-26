@@ -5,6 +5,7 @@ use App\Http\Controllers\KompetisiController;
 use App\Http\Controllers\PesertaAuthController;
 use App\Http\Controllers\PesertaProfilController;
 use App\Models\Kompetisi;
+use App\Models\Peserta;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,8 +20,9 @@ Route::get('/kompetisi', function () {
 
 Route::get('/kompetisi/{id}', function ($id) {
     $kompetisi = Kompetisi::findOrFail($id);
-
-    return view('content.web.kompetisi.detail', compact('kompetisi'));
+    $peserta = Peserta::with('user')->where('user_id', auth()->id())->first();
+    
+    return view('content.web.kompetisi.detail', compact('kompetisi', 'peserta'));
 })->name('web.kompetisi.detail');
 
 Route::get('/portal-login', function () {

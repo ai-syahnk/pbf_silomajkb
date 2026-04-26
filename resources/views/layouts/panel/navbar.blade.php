@@ -11,11 +11,11 @@
                 <li class="{{ request()->routeIs('peserta.hasil') ? 'active' : '' }}"><a href="#">Hasil Lomba</a></li>
             @endif
             <li>
-                <a href="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('web.portal.login') }}" 
+                <a href="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('peserta.logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Logout
                 </a>
-                <form id="logout-form" action="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('web.portal.login') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('peserta.logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </li>
