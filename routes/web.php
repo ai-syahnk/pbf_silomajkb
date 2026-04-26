@@ -31,6 +31,13 @@ Route::get('/peserta/register', function () {
     return view('content.web.auth.peserta.register');
 })->name('web.peserta.register');
 
+// Peserta Panel (dilindungi middleware role peserta)
+Route::middleware('peserta')->prefix('peserta')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('content.panel.peserta.dashboard');
+    })->name('peserta.dashboard');
+});
+
 // Admin Auth
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
