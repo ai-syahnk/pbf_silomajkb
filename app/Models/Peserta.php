@@ -13,6 +13,8 @@ class Peserta extends Model
         'nim',
         'telepon',
         'prodi',
+        'portofolio_path',
+        'ktm_path',
     ];
 
     public function user()

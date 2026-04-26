@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\KompetisiController;
 use App\Http\Controllers\PesertaAuthController;
+use App\Http\Controllers\PesertaProfilController;
 use App\Models\Kompetisi;
 use Illuminate\Support\Facades\Route;
 
@@ -12,11 +13,13 @@ Route::get('/', function () {
 
 Route::get('/kompetisi', function () {
     $kompetisi = Kompetisi::latest()->paginate(6);
+
     return view('content.web.kompetisi.index', compact('kompetisi'));
 })->name('web.kompetisi');
 
 Route::get('/kompetisi/{id}', function ($id) {
     $kompetisi = Kompetisi::findOrFail($id);
+
     return view('content.web.kompetisi.detail', compact('kompetisi'));
 })->name('web.kompetisi.detail');
 
@@ -37,9 +40,13 @@ Route::middleware('peserta')->prefix('peserta')->group(function () {
         return view('content.panel.peserta.dashboard');
     })->name('peserta.dashboard');
 
-    Route::get('/profil', function () {
-        return view('content.panel.peserta.profil');
-    })->name('peserta.profil');
+    Route::get('/profil', [PesertaProfilController::class, 'edit'])->name('peserta.profil');
+    Route::post('/profil', [PesertaProfilController::class, 'update']);
+    Route::put('/profil', [PesertaProfilController::class, 'update'])->name('peserta.profil.update');
+    Route::post('/profil/portofolio', [PesertaProfilController::class, 'destroyPortofolio']);
+    Route::post('/profil/ktm', [PesertaProfilController::class, 'destroyKtm']);
+    Route::delete('/profil/portofolio', [PesertaProfilController::class, 'destroyPortofolio'])->name('peserta.profil.portofolio.destroy');
+    Route::delete('/profil/ktm', [PesertaProfilController::class, 'destroyKtm'])->name('peserta.profil.ktm.destroy');
 });
 
 // Admin Auth
