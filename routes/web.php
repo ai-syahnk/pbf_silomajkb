@@ -50,6 +50,10 @@ Route::middleware('peserta')->prefix('peserta')->group(function () {
         return view('content.panel.peserta.dashboard');
     })->name('peserta.dashboard');
 
+    Route::get('/hasil-lomba', function () {
+        return view('content.panel.peserta.riwayatlomba');
+    })->name('peserta.hasil');
+
     Route::get('/profil', [PesertaProfilController::class, 'edit'])->name('peserta.profil');
     Route::post('/profil', [PesertaProfilController::class, 'update']);
     Route::put('/profil', [PesertaProfilController::class, 'update'])->name('peserta.profil.update');

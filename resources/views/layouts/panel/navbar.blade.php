@@ -8,7 +8,7 @@
             @else
                 <li class="{{ request()->routeIs('peserta.dashboard') ? 'active' : '' }}"><a href="{{ route('peserta.dashboard') }}">Dashboard</a></li>
                 <li class="{{ request()->routeIs('peserta.profil') ? 'active' : '' }}"><a href="{{ route('peserta.profil') }}">Profil Mahasiswa</a></li>
-                <li class="{{ request()->routeIs('peserta.hasil') ? 'active' : '' }}"><a href="#">Hasil Lomba</a></li>
+                <li class="{{ request()->routeIs('peserta.hasil') ? 'active' : '' }}"><a href="{{ route('peserta.hasil') }}">Hasil Lomba</a></li>
             @endif
             <li>
                 <a href="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('peserta.logout') }}"
