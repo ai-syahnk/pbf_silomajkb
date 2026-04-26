@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\KompetisiController;
+use App\Http\Controllers\PesertaAuthController;
 use App\Models\Kompetisi;
 use Illuminate\Support\Facades\Route;
 
@@ -23,13 +24,12 @@ Route::get('/portal-login', function () {
     return view('content.web.auth.index');
 })->name('web.portal.login');
 
-Route::get('/peserta/login', function () {
-    return view('content.web.auth.peserta.login');
-})->name('web.peserta.login');
+Route::get('/peserta/login', [PesertaAuthController::class, 'showLoginForm'])->name('peserta.login');
+Route::post('/peserta/login', [PesertaAuthController::class, 'login'])->name('peserta.login.submit');
+Route::post('/peserta/logout', [PesertaAuthController::class, 'logout'])->name('peserta.logout');
 
-Route::get('/peserta/register', function () {
-    return view('content.web.auth.peserta.register');
-})->name('web.peserta.register');
+Route::get('/peserta/register', [PesertaAuthController::class, 'showRegisterForm'])->name('peserta.register');
+Route::post('/peserta/register', [PesertaAuthController::class, 'register'])->name('peserta.register.submit');
 
 // Peserta Panel (dilindungi middleware role peserta)
 Route::middleware('peserta')->prefix('peserta')->group(function () {

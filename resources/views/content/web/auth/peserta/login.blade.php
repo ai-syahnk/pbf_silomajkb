@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 col-xl-6">
                 <div class="login-card">
-                    
+
                     <div class="login-brand">
                         <img src="{{ asset('images/logo_jkb.png') }}" alt="Logo JKB">
                         <div class="login-brand-text">
@@ -19,6 +19,17 @@
 
                     <form action="#" method="POST">
                         @csrf
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger py-2 px-3" style="font-size: 14px; border-radius: 8px;">
+                            <ul class="mb-0 ps-3">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
                         <div class="mb-3">
                             <label for="email" class="form-label-login">Alamat Email</label>
                             <input type="email" class="form-control form-control-login" id="email" name="email" placeholder="user@gmail.com" required>
@@ -35,7 +46,7 @@
                     </form>
 
                     <div class="login-footer-text">
-                        Tidak punya akun? <a href="{{ route('web.peserta.register') }}" class="login-footer-link">Buat Akun</a>
+                        Tidak punya akun? <a href="{{ route('peserta.register') }}" class="login-footer-link">Buat Akun</a>
                         <br>
                         Kembali ke halaman <a href="{{ route('web.portal.login') }}" class="login-footer-link">Portal Login</a>
                     </div>

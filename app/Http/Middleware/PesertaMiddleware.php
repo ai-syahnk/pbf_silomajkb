@@ -16,7 +16,7 @@ class PesertaMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check() || Auth::user()->role !== 'peserta') {
-            return redirect()->route('web.peserta.login')
+            return redirect()->route('peserta.login')
                 ->withErrors(['email' => 'Silakan login sebagai peserta terlebih dahulu.']);
         }
 
