@@ -7,7 +7,7 @@
                 <li><a href="#">Akun Peserta</a></li>
             @else
                 <li class="{{ request()->routeIs('peserta.dashboard') ? 'active' : '' }}"><a href="{{ route('peserta.dashboard') }}">Dashboard</a></li>
-                <li class="{{ request()->routeIs('peserta.profil') ? 'active' : '' }}"><a href="#">Profil Mahasiswa</a></li>
+                <li class="{{ request()->routeIs('peserta.profil') ? 'active' : '' }}"><a href="{{ route('peserta.profil') }}">Profil Mahasiswa</a></li>
                 <li class="{{ request()->routeIs('peserta.hasil') ? 'active' : '' }}"><a href="#">Hasil Lomba</a></li>
             @endif
             <li>

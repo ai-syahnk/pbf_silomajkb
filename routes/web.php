@@ -36,6 +36,10 @@ Route::middleware('peserta')->prefix('peserta')->group(function () {
     Route::get('/dashboard', function () {
         return view('content.panel.peserta.dashboard');
     })->name('peserta.dashboard');
+
+    Route::get('/profil', function () {
+        return view('content.panel.peserta.profil');
+    })->name('peserta.profil');
 });
 
 // Admin Auth
