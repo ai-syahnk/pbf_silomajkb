@@ -60,6 +60,11 @@ class PesertaAuthController extends Controller
 
     public function showLoginForm()
     {
+        // Jika sudah login sebagai peserta, redirect ke dashboard
+        if (Auth::check() && Auth::user()->role === 'peserta') {
+            return redirect()->route('peserta.dashboard');
+        }
+
         return view('content.web.auth.peserta.login');
     }
 
@@ -70,17 +75,21 @@ class PesertaAuthController extends Controller
             'password' => 'required|string',
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && $user->role !== 'peserta') {
+            return back()->withErrors([
+                'email' => 'Akun ini bukan akun peserta.',
+            ])->onlyInput('email');
+        }
+
         $credentials = [
             'email'    => $request->email,
             'password' => $request->password,
+            'role'     => 'peserta',
         ];
 
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->role !== 'peserta') {
-                Auth::logout();
-                return back()->withErrors(['email' => 'Akun ini bukan akun peserta.']);
-            }
-
             $request->session()->regenerate();
             return redirect()->intended(route('peserta.dashboard'));
         }
