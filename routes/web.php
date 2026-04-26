@@ -6,6 +6,7 @@ use App\Http\Controllers\PesertaAuthController;
 use App\Http\Controllers\PesertaProfilController;
 use App\Models\Kompetisi;
 use App\Models\Peserta;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,10 +21,17 @@ Route::get('/kompetisi', function () {
 
 Route::get('/kompetisi/{id}', function ($id) {
     $kompetisi = Kompetisi::findOrFail($id);
-    $peserta = Peserta::with('user')->where('user_id', auth()->id())->first();
-    
-    return view('content.web.kompetisi.detail', compact('kompetisi', 'peserta'));
+    $peserta = Peserta::with('user')->where('user_id', Auth::id())->first();
+    $sudahTerdaftar = $peserta
+        ? $peserta->kompetisi()->where('kompetisi_id', $kompetisi->id)->exists()
+        : false;
+
+    return view('content.web.kompetisi.detail', compact('kompetisi', 'peserta', 'sudahTerdaftar'));
 })->name('web.kompetisi.detail');
+
+Route::post('/kompetisi/{kompetisi}/daftar', [KompetisiController::class, 'daftar'])
+    ->middleware('peserta')
+    ->name('web.kompetisi.daftar');
 
 Route::get('/portal-login', function () {
     return view('content.web.auth.index');

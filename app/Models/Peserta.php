@@ -21,4 +21,10 @@ class Peserta extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function kompetisi()
+    {
+        return $this->belongsToMany(Kompetisi::class, 'kompetisi_peserta', 'peserta_id', 'kompetisi_id')
+            ->withTimestamps();
+    }
 }

@@ -122,4 +122,35 @@ class KompetisiController extends Controller
 
         return redirect()->route('admin.kompetisi')->with('success', 'Kompetisi berhasil dihapus!');
     }
+
+    /**
+     * Daftarkan peserta login ke kompetisi.
+     */
+    public function daftar(Request $request, Kompetisi $kompetisi)
+    {
+        $user = $request->user();
+        $peserta = $user?->peserta;
+
+        if (!$peserta) {
+            return redirect()->route('peserta.profil')
+                ->with('error', 'Lengkapi profil peserta terlebih dahulu sebelum mendaftar kompetisi.');
+        }
+
+        if (empty($peserta->portofolio_path) || empty($peserta->ktm_path)) {
+            return redirect()->route('peserta.profil')
+                ->with('error', 'Portofolio dan KTM wajib diunggah sebelum mendaftar kompetisi.');
+        }
+
+        $sudahTerdaftar = $kompetisi->peserta()
+            ->wherePivot('peserta_id', $peserta->id)
+            ->exists();
+
+        if ($sudahTerdaftar) {
+            return back()->with('error', 'Anda sudah terdaftar pada kompetisi ini.');
+        }
+
+        $kompetisi->peserta()->attach($peserta->id);
+
+        return back()->with('success', 'Pendaftaran kompetisi berhasil dikirim.');
+    }
 }

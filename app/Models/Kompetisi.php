@@ -18,4 +18,10 @@ class Kompetisi extends Model
         'syarat_ketentuan',
         'gambar',
     ];
+
+    public function peserta()
+    {
+        return $this->belongsToMany(Peserta::class, 'kompetisi_peserta', 'kompetisi_id', 'peserta_id')
+            ->withTimestamps();
+    }
 }
