@@ -17,6 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // User Profile Dropdown
+    const userProfile = document.getElementById('userProfileDropdown');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    if (userProfile && profileDropdown) {
+        userProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!userProfile.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+    }
+
     // Add hover micro-animations to action buttons
     const buttons = document.querySelectorAll('.action-buttons .btn');
     buttons.forEach(btn => {

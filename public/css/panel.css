@@ -100,7 +100,86 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
+
+.user-profile:hover {
+    background-color: #f5f5f5;
+}
+
+.user-profile-wrapper {
+    position: relative;
+}
+
+.dropdown-menu-custom {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 180px;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    margin-top: 0.5rem;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1001;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+}
+
+.dropdown-menu-custom.show {
+    display: flex;
+}
+
+.dropdown-item-custom {
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown-item-custom i {
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+.dropdown-item-custom:hover {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+}
+
+.dropdown-divider-custom {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+.logout-btn {
+    color: var(--btn-red) !important;
+}
+
+.logout-btn i {
+    color: var(--btn-red) !important;
+}
+
+.logout-btn:hover {
+    background-color: #fff1f0 !important;
+}
+
 
 .avatar {
     width: 32px;

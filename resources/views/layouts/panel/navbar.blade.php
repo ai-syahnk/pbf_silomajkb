@@ -10,7 +10,7 @@
                 <li class="{{ request()->routeIs('peserta.profil') ? 'active' : '' }}"><a href="{{ route('peserta.profil') }}">Profil Mahasiswa</a></li>
                 <li class="{{ request()->routeIs('peserta.hasil') ? 'active' : '' }}"><a href="{{ route('peserta.hasil') }}">Hasil Lomba</a></li>
             @endif
-            <li>
+            {{-- <li>
                 <a href="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('peserta.logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Logout
@@ -18,7 +18,7 @@
                 <form id="logout-form" action="{{ Auth::user()->role === 'admin' ? route('admin.logout') : route('peserta.logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </nav>
