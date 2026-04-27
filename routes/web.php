@@ -80,4 +80,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/kompetisi/{kompetisi}/edit', [KompetisiController::class, 'edit'])->name('admin.kompetisi.edit');
     Route::put('/kompetisi/{kompetisi}', [KompetisiController::class, 'update'])->name('admin.kompetisi.update');
     Route::delete('/kompetisi/{kompetisi}', [KompetisiController::class, 'destroy'])->name('admin.kompetisi.destroy');
+
+    Route::get('/akun-peserta', [PesertaAuthController::class, 'akunPeserta'])->name('admin.peserta.index');
+    Route::post('/akun-peserta/{id}/reset-password', [PesertaAuthController::class, 'resetPassword'])->name('admin.peserta.reset-password');
 });

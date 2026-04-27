@@ -106,4 +106,23 @@ class PesertaAuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('peserta.login');
     }
+
+    public function akunPeserta()
+    {
+        $peserta = Peserta::with('user')->get();
+        return view('content.panel.admin.akunpeserta', compact('peserta'));
+    }
+
+    public function resetPassword($id)
+    {
+        $peserta = Peserta::findOrFail($id);
+        $user = $peserta->user;
+        $default_password = '12345678';
+
+        $user->update([
+            'password' => bcrypt($default_password),
+        ]);
+
+        return redirect()->back()->with('success', 'Password peserta ' . $user->name . ' berhasil di-reset menjadi: ' . $default_password);
+    }
 }

@@ -4,7 +4,7 @@
             @if(Auth::user()->role === 'admin')
                 <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li class="{{ request()->routeIs('admin.kompetisi') || request()->routeIs('admin.kompetisi.*') ? 'active' : '' }}"><a href="{{ route('admin.kompetisi') }}">Kompetisi</a></li>
-                <li><a href="#">Akun Peserta</a></li>
+                <li class="{{ request()->routeIs('admin.peserta.*') || request()->routeIs('admin.peserta.index') ? 'active' : '' }}"><a href="{{ route('admin.peserta.index') }}">Akun Peserta</a></li>
             @else
                 <li class="{{ request()->routeIs('peserta.dashboard') ? 'active' : '' }}"><a href="{{ route('peserta.dashboard') }}">Dashboard</a></li>
                 <li class="{{ request()->routeIs('peserta.profil') ? 'active' : '' }}"><a href="{{ route('peserta.profil') }}">Profil Mahasiswa</a></li>
