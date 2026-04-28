@@ -52,7 +52,15 @@ Route::middleware('peserta')->prefix('peserta')->group(function () {
     })->name('peserta.dashboard');
 
     Route::get('/hasil-lomba', function () {
-        return view('content.panel.peserta.riwayatlomba');
+        $peserta = Peserta::with([
+            'kompetisi' => function ($query) {
+                $query->orderBy('kompetisi_peserta.created_at', 'desc');
+            },
+        ])->where('user_id', Auth::id())->first();
+
+        $riwayat = $peserta?->kompetisi ?? collect();
+
+        return view('content.panel.peserta.riwayatlomba', compact('peserta', 'riwayat'));
     })->name('peserta.hasil');
 
     Route::get('/profil', [PesertaProfilController::class, 'edit'])->name('peserta.profil');
