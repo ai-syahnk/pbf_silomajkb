@@ -82,6 +82,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
                 'kp.kategori',
                 'kp.nama_tim',
                 'kp.anggota',
+                'kp.status',
+                'kp.catatan_admin',
                 'p.telepon as kontak',
                 'p.ktm_path',
                 'p.portofolio_path',
@@ -92,6 +94,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
         return view('content.panel.admin.dashboard', compact('pendaftaran'));
     })->name('admin.dashboard');
+
+    Route::patch('/pendaftaran/{pendaftaranId}/proses', [KompetisiController::class, 'prosesPendaftaran'])
+        ->name('admin.pendaftaran.proses');
 
     Route::get('/kompetisi', [KompetisiController::class, 'index'])->name('admin.kompetisi');
     Route::get('/kompetisi/create', [KompetisiController::class, 'create'])->name('admin.kompetisi.create');

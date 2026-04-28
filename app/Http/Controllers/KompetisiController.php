@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kompetisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class KompetisiController extends Controller
@@ -166,5 +167,42 @@ class KompetisiController extends Controller
         ]);
 
         return back()->with('success', 'Pendaftaran kompetisi berhasil dikirim.');
+    }
+
+    /**
+     * Proses status pendaftaran lomba oleh admin.
+     */
+    public function prosesPendaftaran(Request $request, int $pendaftaranId)
+    {
+        $validated = $request->validate([
+            'status' => ['required', 'in:diterima,ditolak'],
+            'catatan_admin' => ['nullable', 'string', 'max:2000'],
+        ], [
+            'status.required' => 'Status proses wajib dipilih.',
+            'status.in' => 'Status tidak valid.',
+            'catatan_admin.max' => 'Catatan admin maksimal 2000 karakter.',
+        ]);
+
+        $pendaftaran = DB::table('kompetisi_peserta')->where('id', $pendaftaranId)->first();
+
+        if (!$pendaftaran) {
+            return back()->with('error', 'Data pendaftaran tidak ditemukan.');
+        }
+
+        if (in_array($pendaftaran->status, ['diterima', 'ditolak'], true)) {
+            return back()->with('error', 'Pendaftaran sudah diproses sebelumnya.');
+        }
+
+        DB::table('kompetisi_peserta')
+            ->where('id', $pendaftaranId)
+            ->update([
+                'status' => $validated['status'],
+                'catatan_admin' => $validated['catatan_admin'] ?? null,
+                'updated_at' => now(),
+            ]);
+
+        $labelStatus = $validated['status'] === 'diterima' ? 'diterima' : 'ditolak';
+
+        return back()->with('success', "Pendaftaran berhasil {$labelStatus}.");
     }
 }

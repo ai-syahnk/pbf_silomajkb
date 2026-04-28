@@ -142,6 +142,28 @@
         <h2 class="fw-bold fs-4">Halaman Dashboard</h2>
     </div>
 
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="card border-0 shadow-sm mb-4" style="background-color: var(--primary-color);">
         <div class="card-header border-0 py-4 px-4 text-white" style="background-color: transparent;">
             <h3 class="card-title m-0 fw-semibold fs-5">Permintaan Pendaftaran Perlombaan</h3>
@@ -153,6 +175,7 @@
                         <th>Kompetisi</th>
                         <th>Kategori</th>
                         <th>Nama Tim</th>
+                        <th>Status</th>
                         <th width="10px" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -163,17 +186,43 @@
                             <td>{{ $item->kategori ?? '-' }}</td>
                             <td>{{ $item->nama_tim ?? '-' }}</td>
                             <td>
+                                @if ($item->status === 'diterima')
+                                    <span class="badge bg-success">Diterima</span>
+                                @elseif ($item->status === 'ditolak')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                @endif
+                            </td>
+                            <td>
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-sm btn-primary btn-detail-action" data-bs-toggle="modal"
                                         data-bs-target="#modalDetail" data-tim="{{ $item->nama_tim ?? '-' }}"
                                         data-kompetisi="{{ $item->kompetisi }}" data-kategori="{{ $item->kategori ?? '-' }}"
                                         data-kontak="{{ $item->kontak ?? '-' }}" data-anggota="{{ $item->anggota ?? '-' }}"
+                                        data-status="{{ $item->status ?? 'pending' }}"
+                                        data-catatan-admin="{{ $item->catatan_admin ?? '' }}"
+                                        data-proses-url="{{ route('admin.pendaftaran.proses', $item->id) }}"
                                         data-ktm-url="{{ $item->ktm_path ? Storage::url($item->ktm_path) : '#' }}"
                                         data-portofolio-url="{{ $item->portofolio_path ? Storage::url($item->portofolio_path) : '#' }}">
                                         Detail
                                     </button>
-                                    <button class="btn btn-sm btn-success">Terima</button>
-                                    <button class="btn btn-sm btn-danger">Tolak</button>
+                                    @if (($item->status ?? 'pending') === 'pending')
+                                        <form action="{{ route('admin.pendaftaran.proses', $item->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="diterima">
+                                            <button class="btn btn-sm btn-success" type="submit">Terima</button>
+                                        </form>
+                                        <form action="{{ route('admin.pendaftaran.proses', $item->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="ditolak">
+                                            <button class="btn btn-sm btn-danger" type="submit">Tolak</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -254,17 +303,23 @@
                                 <img src="{{ asset('storage/peserta/ktm/NDwdcOEOc2Qvm3lWjCSIExSM6NZnu6zwaUL1RjPC.png') }}"
                                     alt="Preview" class="preview-img" style="object-fit: fill; height: 250px;">
                                 <!-- In real implementation, this would be the KTM image -->
+                                <form id="modalProsesForm" action="#" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" id="modalStatusInput" name="status" value="">
 
-                                <div class="catatan-admin">
-                                    <label for="catatan">Catatan Admin:</label>
-                                    <textarea name="catatan" id="catatan" rows="2" placeholder="Tambahkan catatan..."></textarea>
-                                </div>
+                                    <div class="catatan-admin">
+                                        <label for="catatanAdmin">Catatan Admin:</label>
+                                        <textarea name="catatan_admin" id="catatanAdmin" rows="2" placeholder="Tambahkan catatan..."></textarea>
+                                    </div>
 
-                                <div class="modal-btn-group">
-                                    <button type="button" class="btn-tutup" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="button" class="btn-terima-modal">Terima</button>
-                                    <button type="button" class="btn-tolak-modal">Tolak</button>
-                                </div>
+                                    <div class="modal-btn-group">
+                                        <button type="button" class="btn-tutup" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="button" id="btnTerimaModal"
+                                            class="btn-terima-modal">Terima</button>
+                                        <button type="button" id="btnTolakModal" class="btn-tolak-modal">Tolak</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -293,6 +348,12 @@
             // Modal Data Population
             const modalDetail = document.getElementById('modalDetail');
             if (modalDetail) {
+                const modalForm = modalDetail.querySelector('#modalProsesForm');
+                const modalStatusInput = modalDetail.querySelector('#modalStatusInput');
+                const catatanAdminField = modalDetail.querySelector('#catatanAdmin');
+                const btnTerimaModal = modalDetail.querySelector('#btnTerimaModal');
+                const btnTolakModal = modalDetail.querySelector('#btnTolakModal');
+
                 modalDetail.addEventListener('show.bs.modal', event => {
                     const button = event.relatedTarget;
 
@@ -301,8 +362,12 @@
                     const kategori = button.getAttribute('data-kategori');
                     const kontak = button.getAttribute('data-kontak');
                     const anggota = button.getAttribute('data-anggota');
+                    const status = button.getAttribute('data-status') || 'pending';
+                    const catatanAdmin = button.getAttribute('data-catatan-admin') || '';
+                    const prosesUrl = button.getAttribute('data-proses-url') || '#';
                     const ktmUrl = button.getAttribute('data-ktm-url') || '#';
                     const portofolioUrl = button.getAttribute('data-portofolio-url') || '#';
+                    const isProcessed = status !== 'pending';
 
                     modalDetail.querySelector('#detailNamaTim').textContent = tim;
                     modalDetail.querySelector('#detailKompetisi').textContent = kompetisi;
@@ -311,6 +376,22 @@
                     modalDetail.querySelector('#detailAnggota').textContent = anggota;
                     modalDetail.querySelector('#detailKtmLink').setAttribute('href', ktmUrl);
                     modalDetail.querySelector('#detailPortofolioLink').setAttribute('href', portofolioUrl);
+
+                    modalForm.setAttribute('action', prosesUrl);
+                    catatanAdminField.value = catatanAdmin;
+                    catatanAdminField.readOnly = isProcessed;
+                    btnTerimaModal.disabled = isProcessed;
+                    btnTolakModal.disabled = isProcessed;
+                });
+
+                btnTerimaModal.addEventListener('click', function() {
+                    modalStatusInput.value = 'diterima';
+                    modalForm.submit();
+                });
+
+                btnTolakModal.addEventListener('click', function() {
+                    modalStatusInput.value = 'ditolak';
+                    modalForm.submit();
                 });
             }
         });
