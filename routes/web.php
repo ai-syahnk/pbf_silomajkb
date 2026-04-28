@@ -7,6 +7,7 @@ use App\Http\Controllers\PesertaProfilController;
 use App\Models\Kompetisi;
 use App\Models\Peserta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -71,7 +72,25 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 // Admin Panel (dilindungi middleware)
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
-        return view('content.panel.admin.dashboard');
+        $pendaftaran = DB::table('kompetisi_peserta as kp')
+            ->join('kompetisi as k', 'k.id', '=', 'kp.kompetisi_id')
+            ->join('peserta as p', 'p.id', '=', 'kp.peserta_id')
+            ->leftJoin('users as u', 'u.id', '=', 'p.user_id')
+            ->select([
+                'kp.id',
+                'k.nama as kompetisi',
+                'kp.kategori',
+                'kp.nama_tim',
+                'kp.anggota',
+                'p.telepon as kontak',
+                'p.ktm_path',
+                'p.portofolio_path',
+                'u.name as nama_peserta',
+            ])
+            ->orderByDesc('kp.created_at')
+            ->get();
+
+        return view('content.panel.admin.dashboard', compact('pendaftaran'));
     })->name('admin.dashboard');
 
     Route::get('/kompetisi', [KompetisiController::class, 'index'])->name('admin.kompetisi');

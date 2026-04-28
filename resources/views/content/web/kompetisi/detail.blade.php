@@ -17,6 +17,16 @@
                 </div>
             @endif
 
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <!-- Main Detail Card -->
             <div class="card card-detail">
                 <div class="row">
@@ -133,21 +143,48 @@
                     </div>
                 @endif
 
-                <!-- Action Buttons -->
-                <div class="d-flex justify-content-end mt-4 mb-5">
-                    <a href="{{ route('web.kompetisi') }}" class="btn btn-batal btn-sm">Batal</a>
-                    @if ($sudahTerdaftar ?? false)
-                        <button class="btn btn-daftar-submit btn-sm" type="button" disabled>Sudah Terdaftar</button>
-                    @elseif ($canDaftar)
-                        <form action="{{ route('web.kompetisi.daftar', $kompetisi) }}" method="POST" class="d-inline">
-                            @csrf
+                @if ($canDaftar && !($sudahTerdaftar ?? false))
+                    <form action="{{ route('web.kompetisi.daftar', $kompetisi) }}" method="POST">
+                        @csrf
+
+                        <h5 class="section-label">Data Pendaftaran Tim</h5>
+                        <div class="card card-detail">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="kategori" class="info-label">Kategori</label>
+                                    <input type="text" id="kategori" name="kategori" class="form-control"
+                                        value="{{ old('kategori') }}" placeholder="Contoh: Pemrograman" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="nama_tim" class="info-label">Nama Tim</label>
+                                    <input type="text" id="nama_tim" name="nama_tim" class="form-control"
+                                        value="{{ old('nama_tim') }}" placeholder="Contoh: TIM GEMASTIK TI" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="anggota" class="info-label">Anggota</label>
+                                    <input type="text" id="anggota" name="anggota" class="form-control"
+                                        value="{{ old('anggota') }}" placeholder="Contoh: Valen, Budi, Siti" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4 mb-5">
+                            <a href="{{ route('web.kompetisi') }}" class="btn btn-batal btn-sm">Batal</a>
                             <button class="btn btn-daftar-submit btn-sm" type="submit">Daftar</button>
-                        </form>
-                    @else
-                        <button class="btn btn-daftar-submit btn-sm" type="button" disabled
-                            title="Lengkapi profil, portofolio, dan KTM untuk mendaftar.">Daftar</button>
-                    @endif
-                </div>
+                        </div>
+                    </form>
+                @else
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-end mt-4 mb-5">
+                        <a href="{{ route('web.kompetisi') }}" class="btn btn-batal btn-sm">Batal</a>
+                        @if ($sudahTerdaftar ?? false)
+                            <button class="btn btn-daftar-submit btn-sm" type="button" disabled>Sudah Terdaftar</button>
+                        @else
+                            <button class="btn btn-daftar-submit btn-sm" type="button" disabled
+                                title="Lengkapi profil, portofolio, dan KTM untuk mendaftar.">Daftar</button>
+                        @endif
+                    </div>
+                @endif
             @else
                 <div class="d-flex justify-content-end mt-4 mb-5">
                     <a href="{{ route('web.kompetisi') }}" class="btn btn-batal btn-sm">Kembali</a>

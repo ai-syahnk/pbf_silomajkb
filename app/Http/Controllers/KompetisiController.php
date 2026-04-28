@@ -149,7 +149,21 @@ class KompetisiController extends Controller
             return back()->with('error', 'Anda sudah terdaftar pada kompetisi ini.');
         }
 
-        $kompetisi->peserta()->attach($peserta->id);
+        $validated = $request->validate([
+            'kategori' => ['required', 'string', 'max:100'],
+            'nama_tim' => ['required', 'string', 'max:150'],
+            'anggota' => ['required', 'string', 'max:2000'],
+        ], [
+            'kategori.required' => 'Kategori wajib diisi.',
+            'nama_tim.required' => 'Nama tim wajib diisi.',
+            'anggota.required' => 'Anggota tim wajib diisi.',
+        ]);
+
+        $kompetisi->peserta()->attach($peserta->id, [
+            'kategori' => $validated['kategori'],
+            'nama_tim' => $validated['nama_tim'],
+            'anggota' => $validated['anggota'],
+        ]);
 
         return back()->with('success', 'Pendaftaran kompetisi berhasil dikirim.');
     }

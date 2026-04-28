@@ -22,6 +22,7 @@ class Kompetisi extends Model
     public function peserta()
     {
         return $this->belongsToMany(Peserta::class, 'kompetisi_peserta', 'kompetisi_id', 'peserta_id')
+            ->withPivot(['kategori', 'nama_tim', 'anggota'])
             ->withTimestamps();
     }
 }

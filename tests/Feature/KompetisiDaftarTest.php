@@ -37,7 +37,11 @@ class KompetisiDaftarTest extends TestCase
 
         $response = $this->actingAs($user)
             ->from(route('web.kompetisi.detail', $kompetisi->id))
-            ->post(route('web.kompetisi.daftar', $kompetisi));
+            ->post(route('web.kompetisi.daftar', $kompetisi), [
+                'kategori' => 'UI/UX',
+                'nama_tim' => 'Tim Sigma',
+                'anggota' => 'Andi, Budi',
+            ]);
 
         $response->assertRedirect(route('peserta.profil'));
         $response->assertSessionHas('error', 'Portofolio dan KTM wajib diunggah sebelum mendaftar kompetisi.');
@@ -63,13 +67,20 @@ class KompetisiDaftarTest extends TestCase
 
         $response = $this->actingAs($user)
             ->from(route('web.kompetisi.detail', $kompetisi->id))
-            ->post(route('web.kompetisi.daftar', $kompetisi));
+            ->post(route('web.kompetisi.daftar', $kompetisi), [
+                'kategori' => 'UI/UX',
+                'nama_tim' => 'Tim Inovasi',
+                'anggota' => 'Siti, Rina, Dewa',
+            ]);
 
         $response->assertRedirect(route('web.kompetisi.detail', $kompetisi->id));
         $response->assertSessionHas('success', 'Pendaftaran kompetisi berhasil dikirim.');
         $this->assertDatabaseHas('kompetisi_peserta', [
             'kompetisi_id' => $kompetisi->id,
             'peserta_id' => $peserta->id,
+            'kategori' => 'UI/UX',
+            'nama_tim' => 'Tim Inovasi',
+            'anggota' => 'Siti, Rina, Dewa',
         ]);
     }
 
