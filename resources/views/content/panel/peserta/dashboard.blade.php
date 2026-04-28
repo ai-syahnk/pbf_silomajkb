@@ -21,11 +21,11 @@
 
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number">5</div>
+            <div class="stat-number">{{ $jumlahSudahDiikuti ?? 0 }}</div>
             <div class="stat-label">Perlombaan yang<br>sudah diikuti</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">2</div>
+            <div class="stat-number">{{ $jumlahSedangDiikuti ?? 0 }}</div>
             <div class="stat-label">Perlombaan yang<br>sedang diikuti</div>
         </div>
     </div>

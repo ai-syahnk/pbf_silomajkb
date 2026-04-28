@@ -48,7 +48,17 @@ Route::post('/peserta/register', [PesertaAuthController::class, 'register'])->na
 // Peserta Panel (dilindungi middleware role peserta)
 Route::middleware('peserta')->prefix('peserta')->group(function () {
     Route::get('/dashboard', function () {
-        return view('content.panel.peserta.dashboard');
+        $peserta = Peserta::where('user_id', Auth::id())->first();
+
+        $jumlahSedangDiikuti = $peserta
+            ? $peserta->kompetisi()->wherePivot('status', 'pending')->count()
+            : 0;
+
+        $jumlahSudahDiikuti = $peserta
+            ? $peserta->kompetisi()->wherePivotIn('status', ['diterima', 'ditolak'])->count()
+            : 0;
+
+        return view('content.panel.peserta.dashboard', compact('jumlahSudahDiikuti', 'jumlahSedangDiikuti'));
     })->name('peserta.dashboard');
 
     Route::get('/hasil-lomba', function () {
